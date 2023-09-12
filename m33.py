@@ -7,29 +7,27 @@ m3=3.2e9
 m2=4.8e9
 k=0.31
 rm=8e3
-v1=25
-r1=1e3
+vi=25
+ri=1e3
+vf=28
+rf=50e3
+l=100
 
+mi=(vi**2)*k*ri/g
+mf=(vf**2)*k*rf/g
+voli=(4/3)*np.pi*ri**2
+volf=(4/3)*np.pi*rf**2
+s=rf*(np.log(mf*voli/(mi*volf)))/(rf-ri)
 
-m1=(v1**2)*k*r1/g
-m=m3-m1
-
-vol=(4/3)*math.pi*(rm**3)
-d=m/vol
-
-v=[]
 rtest=[1e3,3e3,5e3,8e3, 10e3, 20e3,30e3,40e3,50e3]
-r=np.linspace(1e3,50e3,100)
+r=np.linspace(ri,rf,l)
 
+d=(mi/voli)*np.exp(s*(r-ri)/rf)
+mc=d*4*np.pi*r**2*(rf-ri)/l
+m=np.cumsum(mc)
 
-for i in r:
-    if i<=8e3:
-        mi=(4/3)*math.pi*(i**3)*d
-    else:
-        mi=m
-    #print("r=",i,",m=",mi)
-    vi=math.sqrt(g*(m1+mi)/(k*i))
-    v.append(vi)
+v=np.sqrt(g*m/(k*r))
+
 
 
 #print("r=",r)
