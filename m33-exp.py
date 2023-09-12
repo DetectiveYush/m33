@@ -22,7 +22,7 @@ s=rf*(np.log(mf*voli/(mi*volf)))/(rf-ri)
 rtest=[1e3,3e3,5e3,8e3, 10e3, 20e3,30e3,40e3,50e3]
 r=np.linspace(ri,rf,l)
 
-d=(mi/voli)*np.exp(s*(r-ri)/rf)
+d=(mi/voli)*np.exp(s*(r-rm)/rf)
 mc=d*4*np.pi*r**2*(rf-ri)/l
 m=np.cumsum(mc)
 
