@@ -3,16 +3,16 @@ import math
 import matplotlib.pyplot as plt
 
 g=4.300917e-3
-m3=3.2e9
-m2=4.8e9
-k=0.31
+m3=0.8e8
+m2=1e9
+k=1
 rm=8e3
 v1=25
 r1=1e3
 
 
-m1=(v1**2)*k*r1/g
-m=m3-m1
+m1=(v1**2)*k*rm/g
+m=m2
 
 vol=(4/3)*math.pi*(rm**3)
 d=m/vol
@@ -26,9 +26,9 @@ for i in r:
     if i<=8e3:
         mi=(4/3)*math.pi*(i**3)*d
     else:
-        mi=m
+        mi=m1
     #print("r=",i,",m=",mi)
-    vi=math.sqrt(g*(m1+mi)/(k*i))
+    vi=math.sqrt(g*(mi)/(k*i))
     v.append(vi)
 
 
@@ -37,6 +37,6 @@ for i in r:
 
 plt.plot(r, v)
 plt.title("Approximated classical m33 rotation curve")
-plt.xlabel("Distance from galaxy center (Km)")
+plt.xlabel("Distance from galaxy center (ly)")
 plt.ylabel("Velocity of star (Km/s)")
 plt.show()
